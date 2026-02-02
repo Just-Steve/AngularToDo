@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="index.css">
+
+</head>
+
+<body ng-app="myApp">
+    
+    <div ng-controller="work" class="container">
+        <div class="header">
+            <h1><u>To do list form</u></h1>
+            <h2>{{message}}</h2>
+
+        </div>
+
+        <div class="form-section">
+            <form ng-submit="addTodo()" class="input-group">
+                <input type="text" ng-model="newTodo" placeholder="Write your todo" required><br><br>
+                
+                <button type="submit" ng-disabled="!newTodo">Add Task</button>
+            </form>
+        </div>
+
+        <div class="stats" ng-show="todos.length > 0">
+            <div>Total: <span>{{todos.length}}</span></div>
+            <div>Active: <span>{{getRemainingCount()}}</span></div>
+            <div>Completed: <span>{{getCompletedCount()}}</span></div>
+        </div>
+
+        <div class="todo-list">
+            <div ng-show="getFilteredTodos().length === 0" class="empty-state">
+
+                <p ng-show="todos.length === 0"><b>No tasks yet. Add one above</b></p>
+                <p ng-show="todos.length > 0">No {{filter}} tasks</p>
+            </div>
+
+            <div ng-repeat="todo in getFilteredTodos() track by $index" class="todo-item"
+                ng-class="{completed: todo.completed}">
+                <input type="checkbox" ng-model="todo.completed" ng-change="saveTodos()">
+                <span class="todo-text">{{todo.text}}</span>
+                <button class="delete-btn" ng-click="deleteTodo(todo)">Delete</button>
+            </div>
+        </div>
+
+        <div class="filter-section" ng-show="todos.length > 0">
+            <button class="filter-btn" ng-class="{active: filter === 'all'}" ng-click="setFilter('all')">
+                All
+            </button>
+            <button class="filter-btn" ng-class="{active: filter === 'active'}" ng-click="setFilter('active')">
+                Active
+            </button>
+            <button class="filter-btn" ng-class="{active: filter === 'completed'}" ng-click="setFilter('completed')">
+                Completed
+            </button>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
