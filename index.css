@@ -79,6 +79,21 @@ form button {
     color: white;
     border: none;
 }
+#btn-filter:hover{
+    background-color: #00c3ff3a;
+    color: white;
+    border: none;
+}
+#btn-hover:hover{
+    background-color: #00ff4c;
+    color: white;
+    border: none;
+}
+#btn-hover-red:hover{
+    background-color: hsl(355, 100%, 50%);
+    color: white;
+    border: none;
+}
 
 b{
     color: rgb(131, 7, 13);

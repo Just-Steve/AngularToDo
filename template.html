@@ -52,19 +52,19 @@
                 <input type="text" ng-if="$ctrl.editingTodo === todo" ng-model="$ctrl.editText"
                     ng-keyup="$event.keyCode === 13 && $ctrl.saveEdit()">
 
-                <button ng-if="$ctrl.editingTodo !== todo" ng-click="$ctrl.startEdit(todo)">
+                <button ng-if="$ctrl.editingTodo !== todo" ng-click="$ctrl.startEdit(todo)" id="btn-hover">
                     Edit
                 </button>
 
-                <button ng-if="$ctrl.editingTodo === todo" ng-click="$ctrl.saveEdit()">
+                <button ng-if="$ctrl.editingTodo === todo" ng-click="$ctrl.saveEdit()" id="btn-hover">
                     Save
                 </button>
 
-                <button ng-if="$ctrl.editingTodo === todo" ng-click="$ctrl.cancelEdit()">
+                <button ng-if="$ctrl.editingTodo === todo" ng-click="$ctrl.cancelEdit()" id="btn-hover">
                     Cancel
                 </button>
 
-                <button ng-click="$ctrl.delete(todo)">
+                <button ng-click="$ctrl.delete(todo)" id="btn-hover-red">
                     Delete
                 </button>
             </div>
