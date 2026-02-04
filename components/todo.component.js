@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     function TodoController(TodoService) {
@@ -11,14 +11,14 @@
         c.newTodo = '';
         c.message = "Welcome to your todo list... add, edit, and save your work plans...";
 
-        c.refresh = function() {
+        c.refresh = function () {
             c.todos = TodoService.getTodos();
             c.filteredTodos = TodoService.getFilteredTodos(c.filter);
             c.remaining = TodoService.getRemainingCount();
             c.completed = TodoService.getCompletedCount();
         };
 
-        c.addTodo = function() {
+        c.addTodo = function () {
             if (c.newTodo && c.newTodo.trim()) {
                 TodoService.addTodo(c.newTodo);
                 c.newTodo = '';
@@ -26,12 +26,12 @@
             }
         };
 
-        c.startEdit = function(todo) {
+        c.startEdit = function (todo) {
             c.editingTodo = todo;
             c.editText = todo.text;
         };
 
-        c.saveEdit = function() {
+        c.saveEdit = function () {
             if (c.editingTodo) {
                 TodoService.updateTodo(c.editingTodo, c.editText);
                 c.editingTodo = null;
@@ -40,22 +40,22 @@
             }
         };
 
-        c.cancelEdit = function() {
+        c.cancelEdit = function () {
             c.editingTodo = null;
             c.editText = '';
         };
 
-        c.delete = function(todo) {
+        c.delete = function (todo) {
             TodoService.deleteTodo(todo);
             c.refresh();
         };
 
-        c.setFilter = function(filter) {
+        c.setFilter = function (filter) {
             c.filter = filter;
             c.refresh();
         };
 
-        c.$onInit = function() {
+        c.$onInit = function () {
             c.refresh();
         };
     }
