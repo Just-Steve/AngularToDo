@@ -2,61 +2,61 @@
     'use strict';
 
     function TodoController(TodoService) {
-        var vm = this;
-        vm.todos = [];
-        vm.filteredTodos = [];
-        vm.filter = 'all';
-        vm.editingTodo = null;
-        vm.editText = '';
-        vm.newTodo = '';
-        vm.message = "Welcome to your todo list... add, edit, and save your work plans...";
+        var c = this;
+        c.todos = [];
+        c.filteredTodos = [];
+        c.filter = 'all';
+        c.editingTodo = null;
+        c.editText = '';
+        c.newTodo = '';
+        c.message = "Welcome to your todo list... add, edit, and save your work plans...";
 
-        vm.refresh = function() {
-            vm.todos = TodoService.getTodos();
-            vm.filteredTodos = TodoService.getFilteredTodos(vm.filter);
-            vm.remaining = TodoService.getRemainingCount();
-            vm.completed = TodoService.getCompletedCount();
+        c.refresh = function() {
+            c.todos = TodoService.getTodos();
+            c.filteredTodos = TodoService.getFilteredTodos(c.filter);
+            c.remaining = TodoService.getRemainingCount();
+            c.completed = TodoService.getCompletedCount();
         };
 
-        vm.addTodo = function() {
-            if (vm.newTodo && vm.newTodo.trim()) {
-                TodoService.addTodo(vm.newTodo);
-                vm.newTodo = '';
-                vm.refresh();
+        c.addTodo = function() {
+            if (c.newTodo && c.newTodo.trim()) {
+                TodoService.addTodo(c.newTodo);
+                c.newTodo = '';
+                c.refresh();
             }
         };
 
-        vm.startEdit = function(todo) {
-            vm.editingTodo = todo;
-            vm.editText = todo.text;
+        c.startEdit = function(todo) {
+            c.editingTodo = todo;
+            c.editText = todo.text;
         };
 
-        vm.saveEdit = function() {
-            if (vm.editingTodo) {
-                TodoService.updateTodo(vm.editingTodo, vm.editText);
-                vm.editingTodo = null;
-                vm.editText = '';
-                vm.refresh();
+        c.saveEdit = function() {
+            if (c.editingTodo) {
+                TodoService.updateTodo(c.editingTodo, c.editText);
+                c.editingTodo = null;
+                c.editText = '';
+                c.refresh();
             }
         };
 
-        vm.cancelEdit = function() {
-            vm.editingTodo = null;
-            vm.editText = '';
+        c.cancelEdit = function() {
+            c.editingTodo = null;
+            c.editText = '';
         };
 
-        vm.delete = function(todo) {
+        c.delete = function(todo) {
             TodoService.deleteTodo(todo);
-            vm.refresh();
+            c.refresh();
         };
 
-        vm.setFilter = function(filter) {
-            vm.filter = filter;
-            vm.refresh();
+        c.setFilter = function(filter) {
+            c.filter = filter;
+            c.refresh();
         };
 
-        vm.$onInit = function() {
-            vm.refresh();
+        c.$onInit = function() {
+            c.refresh();
         };
     }
 
