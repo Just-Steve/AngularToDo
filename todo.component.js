@@ -35,7 +35,7 @@ angular.module('myApp')
 
       c.saveEdit = function () {
         if (c.editingTodo) {
-          Service.updateTodoText(c.editingTodo, c.editText);
+          Service.updateTodo(c.editingTodo, c.editText);
           c.editingTodo = null;
           c.editText = '';
           c.refresh();

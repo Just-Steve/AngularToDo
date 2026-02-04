@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <link rel="stylesheet" href="index.css">
+
 </head>
 
 <body>
@@ -17,7 +19,7 @@
         </div>
 
         <form ng-submit="$ctrl.addTodo()" class="input-group">
-            <input type="text" ng-model="$ctrl.newTodo" placeholder="Write your todo" required>
+            <input type="text" ng-model="$ctrl.newTodo" placeholder="Write your here..." required>
             <br><br>
             <button type="submit" ng-disabled="!$ctrl.newTodo">
                 Add Task
@@ -68,16 +70,16 @@
             </div>
         </div>
 
-        <div class="filter-section" ng-show="$ctrl.todos.length">
-            <button ng-click="$ctrl.setFilter('all')" ng-class="{active: $ctrl.filter === 'all'}">
+        <div class="filter-section" ng-show="$ctrl.todos.length" >
+            <button ng-click="$ctrl.setFilter('all')" ng-class="{active: $ctrl.filter === 'all'}" id="btn-filter" >
                 All
             </button>
 
-            <button ng-click="$ctrl.setFilter('active')" ng-class="{active: $ctrl.filter === 'active'}">
+            <button ng-click="$ctrl.setFilter('active')" ng-class="{active: $ctrl.filter === 'active'}" id="btn-filter">
                 Active
             </button>
 
-            <button ng-click="$ctrl.setFilter('completed')" ng-class="{active: $ctrl.filter === 'completed'}">
+            <button ng-click="$ctrl.setFilter('completed')" ng-class="{active: $ctrl.filter === 'completed'}" id="btn-filter">
                 Completed
             </button>
         </div>
