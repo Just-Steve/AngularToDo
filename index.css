@@ -50,6 +50,7 @@ form button {
     align-items: center;
     padding: 6px 0;
     border-bottom: 1px solid #eee;
+    
 }
 
 .todo-item.completed .todo-text {

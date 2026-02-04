@@ -51,7 +51,7 @@
                 </span>
 
                 <input type="text" ng-if="$ctrl.editingTodo === todo" ng-model="$ctrl.editText"
-                    ng-keyup="$event.keyCode === 13 && $ctrl.saveEdit()">
+                    ng-keyup="$event.keyCode === 'Enter' && $ctrl.saveEdit()">
 
                 <button ng-if="$ctrl.editingTodo !== todo" ng-click="$ctrl.startEdit(todo)" id="btn-hover">
                     Edit
