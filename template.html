@@ -1,46 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 </head>
+
 <body>
-     <div class="container">
-      <div class="header">
-        <h1><u>{{$ctrl.title}}</u></h1>
-        <h2>{{$ctrl.message}}</h2>
-      </div>
+    <div class="container">
 
-      <form ng-submit="$ctrl.addTodo()" class="input-group">
-        <input type="text" ng-model="$ctrl.newTodo" placeholder="Write your todo" required><br/><br/>
-        <button type="submit" ng-disabled="!$ctrl.newTodo">Add Task</button>
-      </form>
-
-      <div class="stats" ng-show="$ctrl.todos.length">
-        <div>Total: {{$ctrl.todos.length}}</div>
-        <div>Active: {{$ctrl.remaining}}</div>
-        <div>Completed: {{$ctrl.completed}}</div>
-      </div>
-
-      <div class="todo-list">
-        <p ng-show="!$ctrl.filteredTodos.length">
-          <b>No task found, add one above... </b>
-          <b ng-if="$ctrl.filter !== 'all'">No {{$ctrl.filter}} tasks</b>
-        </p>
-
-        <div ng-repeat="todo in $ctrl.filteredTodos track by $index" class="todo-item" ng-class="{completed: todo.completed}">
-          <input type="checkbox" ng-model="todo.completed" ng-change="$ctrl.refresh()">
-          <span>{{todo.text}}</span>
-          <button ng-click="$ctrl.delete(todo)">Delete</button>
+        <div class="header">
+            <h1><u>{{$ctrl.title}}</u></h1>
+            <p>{{$ctrl.message}}</p>
         </div>
-      </div>
 
-      <div class="filter-section" ng-show="$ctrl.todos.length">
-        <button ng-click="$ctrl.setFilter('all')" ng-class="{active: $ctrl.filter==='all'}">All</button>
-        <button ng-click="$ctrl.setFilter('active')" ng-class="{active: $ctrl.filter==='active'}">Active</button>
-        <button ng-click="$ctrl.setFilter('completed')" ng-class="{active: $ctrl.filter==='completed'}">Completed</button>
-      </div>
+        <form ng-submit="$ctrl.addTodo()" class="input-group">
+            <input type="text" ng-model="$ctrl.newTodo" placeholder="Write your todo" required>
+            <br><br>
+            <button type="submit" ng-disabled="!$ctrl.newTodo">
+                Add Task
+            </button>
+        </form>
+
+        <div class="stats" ng-show="$ctrl.todos.length">
+            <div>Total: {{$ctrl.todos.length}}</div>
+            <div>Active: {{$ctrl.remaining}}</div>
+            <div>Completed: {{$ctrl.completed}}</div>
+        </div>
+
+        <div class="todo-list">
+            <p ng-show="!$ctrl.filteredTodos.length">
+                <b>No task found, add one above...</b>
+                <b ng-if="$ctrl.filter !== 'all'">
+                    No {{$ctrl.filter}} tasks
+                </b>
+            </p>
+
+            <div ng-repeat="todo in $ctrl.filteredTodos track by $index" class="todo-item"
+                ng-class="{completed: todo.completed}">
+
+                <input type="checkbox" ng-model="todo.completed" ng-change="$ctrl.refresh()">
+
+                <span ng-if="$ctrl.editingTodo !== todo">
+                    {{todo.text}}
+                </span>
+
+                <input type="text" ng-if="$ctrl.editingTodo === todo" ng-model="$ctrl.editText"
+                    ng-keyup="$event.keyCode === 13 && $ctrl.saveEdit()">
+
+                <button ng-if="$ctrl.editingTodo !== todo" ng-click="$ctrl.startEdit(todo)">
+                    Edit
+                </button>
+
+                <button ng-if="$ctrl.editingTodo === todo" ng-click="$ctrl.saveEdit()">
+                    Save
+                </button>
+
+                <button ng-if="$ctrl.editingTodo === todo" ng-click="$ctrl.cancelEdit()">
+                    Cancel
+                </button>
+
+                <button ng-click="$ctrl.delete(todo)">
+                    Delete
+                </button>
+            </div>
+        </div>
+
+        <div class="filter-section" ng-show="$ctrl.todos.length">
+            <button ng-click="$ctrl.setFilter('all')" ng-class="{active: $ctrl.filter === 'all'}">
+                All
+            </button>
+
+            <button ng-click="$ctrl.setFilter('active')" ng-class="{active: $ctrl.filter === 'active'}">
+                Active
+            </button>
+
+            <button ng-click="$ctrl.setFilter('completed')" ng-class="{active: $ctrl.filter === 'completed'}">
+                Completed
+            </button>
+        </div>
+
     </div>
 </body>
+
 </html>

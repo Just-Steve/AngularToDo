@@ -1,31 +1,67 @@
 angular.module('myApp')
-.service('Service', function () {
-    var todos = [];
+    .service('Service', function () {
+        var STORAGE_KEY = 'todos_app';
+        var todos = loadFromStorage();
 
-    this.getTodos = function () {
-        return todos;
-    };
+        function loadFromStorage() {
+            var data = localStorage.getItem(STORAGE_KEY);
+            return data ? JSON.parse(data) : [];
+        }
 
-    this.addTodo = function (text) {
-        todos.push({ text: text, completed: false });
-    };
+        function saveToStorage() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+        }
 
-    this.deleteTodo = function (todo) {
-        var index = todos.indexOf(todo);
-        if (index > -1) todos.splice(index, 1);
-    };
+        this.getTodos = function () {
+            return todos;
+        };
 
-    this.getRemainingCount = function () {
-        return todos.filter(td => !td.completed).length;
-    };
+        this.addTodo = function (text) {
+            todos.push({
+                text: text,
+                completed: false,
+                isEditing: false
+            });
+            saveToStorage();
+        };
 
-    this.getCompletedCount = function () {
-        return todos.filter(td => td.completed).length;
-    };
+        this.deleteTodo = function (todo) {
+            var index = todos.indexOf(todo);
+            if (index > -1) {
+                todos.splice(index, 1);
+                saveToStorage();
+            }
+        };
 
-    this.getFilteredTodos = function (filter) {
-        if (filter === 'active') return todos.filter(td => !td.completed);
-        if (filter === 'completed') return todos.filter(td => td.completed);
-        return todos;
-    };
-});
+        this.updateTodo = function (todo, newText) {
+            var index = todos.indexOf(todo);
+            if (index > -1 && newText.trim()) {
+                todos[index].text = newText.trim();
+                todos[index].isEditing = false;
+                saveToStorage();
+            }
+        };
+
+        this.toggleEdit = function (todo) {
+            todo.isEditing = true;
+            todo.editText = todo.text;
+        };
+
+        this.cancelEdit = function (todo) {
+            todo.isEditing = false;
+        };
+
+        this.getRemainingCount = function () {
+            return todos.filter(t => !t.completed).length;
+        };
+
+        this.getCompletedCount = function () {
+            return todos.filter(t => t.completed).length;
+        };
+
+        this.getFilteredTodos = function (filter) {
+            if (filter === 'active') return todos.filter(t => !t.completed);
+            if (filter === 'completed') return todos.filter(t => t.completed);
+            return todos;
+        };
+    });
