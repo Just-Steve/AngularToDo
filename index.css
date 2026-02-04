@@ -18,6 +18,12 @@ h1 {
     margin-bottom: 20px;
     color: rgb(20, 238, 238);
 }
+.addbutton:hover{
+    cursor: pointer;
+    background-color: #007bffd5;
+
+
+}
 
 form input[type="text"] {
     width: 100%;
@@ -25,6 +31,9 @@ form input[type="text"] {
     margin-right: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+.checkbox:hover{
+    cursor: pointer;
 }
 
 form button {
@@ -83,16 +92,19 @@ form button {
     background-color: #00c3ff3a;
     color: white;
     border: none;
+    cursor: pointer;
 }
 #btn-hover:hover{
     background-color: #00ff4c;
     color: white;
     border: none;
+    cursor: pointer;
 }
 #btn-hover-red:hover{
     background-color: hsl(355, 100%, 50%);
     color: white;
     border: none;
+    cursor: pointer;
 }
 
 b{

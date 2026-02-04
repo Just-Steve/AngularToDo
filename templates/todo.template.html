@@ -21,7 +21,7 @@
         <form ng-submit="$ctrl.addTodo()" class="input-group">
             <input type="text" ng-model="$ctrl.newTodo" placeholder="Write your todo list plan here..." required>
             <br><br>
-            <button type="submit" ng-disabled="!$ctrl.newTodo">
+            <button type="submit" ng-disabled="!$ctrl.newTodo" class="addbutton">
                 Add Task
             </button>
         </form>
@@ -43,7 +43,7 @@
             <div ng-repeat="todo in $ctrl.filteredTodos track by $index" class="todo-item"
                 ng-class="{completed: todo.completed}">
 
-                <input type="checkbox" ng-model="todo.completed" ng-change="$ctrl.refresh()">
+                <input type="checkbox" ng-model="todo.completed" ng-change="$ctrl.refresh()" class="checkbox">
 
                 <span ng-if="$ctrl.editingTodo !== todo">
                     {{todo.text}}
@@ -70,8 +70,8 @@
             </div>
         </div>
 
-        <div class="filter-section" ng-show="$ctrl.todos.length" >
-            <button ng-click="$ctrl.setFilter('all')" ng-class="{active: $ctrl.filter === 'all'}" id="btn-filter" >
+        <div class="filter-section" ng-show="$ctrl.todos.length">
+            <button ng-click="$ctrl.setFilter('all')" ng-class="{active: $ctrl.filter === 'all'}" id="btn-filter">
                 All
             </button>
 
@@ -79,7 +79,8 @@
                 Active
             </button>
 
-            <button ng-click="$ctrl.setFilter('completed')" ng-class="{active: $ctrl.filter === 'completed'}" id="btn-filter">
+            <button ng-click="$ctrl.setFilter('completed')" ng-class="{active: $ctrl.filter === 'completed'}"
+                id="btn-filter">
                 Completed
             </button>
         </div>

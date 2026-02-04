@@ -1,5 +1,7 @@
-angular.module('myApp')
-    .service('Service', function () {
+(function() {
+    'use strict';
+
+    function TodoService() {
         var STORAGE_KEY = 'todos_app';
         var todos = loadFromStorage();
 
@@ -12,20 +14,16 @@ angular.module('myApp')
             localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
         }
 
-        this.getTodos = function () {
+        this.getTodos = function() {
             return todos;
         };
 
-        this.addTodo = function (text) {
-            todos.push({
-                text: text,
-                completed: false,
-                isEditing: false
-            });
+        this.addTodo = function(text) {
+            todos.push({ text: text, completed: false, isEditing: false });
             saveToStorage();
         };
 
-        this.deleteTodo = function (todo) {
+        this.deleteTodo = function(todo) {
             var index = todos.indexOf(todo);
             if (index > -1) {
                 todos.splice(index, 1);
@@ -33,7 +31,7 @@ angular.module('myApp')
             }
         };
 
-        this.updateTodo = function (todo, newText) {
+        this.updateTodo = function(todo, newText) {
             var index = todos.indexOf(todo);
             if (index > -1 && newText.trim()) {
                 todos[index].text = newText.trim();
@@ -42,26 +40,21 @@ angular.module('myApp')
             }
         };
 
-        this.toggleEdit = function (todo) {
-            todo.isEditing = true;
-            todo.editText = todo.text;
-        };
-
-        this.cancelEdit = function (todo) {
-            todo.isEditing = false;
-        };
-
-        this.getRemainingCount = function () {
+        this.getRemainingCount = function() {
             return todos.filter(t => !t.completed).length;
         };
 
-        this.getCompletedCount = function () {
+        this.getCompletedCount = function() {
             return todos.filter(t => t.completed).length;
         };
 
-        this.getFilteredTodos = function (filter) {
+        this.getFilteredTodos = function(filter) {
             if (filter === 'active') return todos.filter(t => !t.completed);
             if (filter === 'completed') return todos.filter(t => t.completed);
             return todos;
         };
-    });
+    }
+
+    TodoService.$inject = [];
+    angular.module('myApp').service('TodoService', TodoService);
+})();
