@@ -25,16 +25,16 @@ h1 {
 
 }
 
-form input[type="text"] {
-    width: 100%;
-    padding: 8px;
-    margin-right: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
+
 .checkbox:hover{
     cursor: pointer;
 }
+.write-box{
+    width: 70%;
+    padding: 8px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;}
 
 form button {
     padding: 8px 12px;
